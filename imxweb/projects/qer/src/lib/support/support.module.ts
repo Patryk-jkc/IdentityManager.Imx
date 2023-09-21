@@ -1,25 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewsletterFeatureComponent } from './newsletter-feature/newsletter-feature.component';
-import { CoeContactFeatureComponent } from './coe-contact-feature/coe-contact-feature.component';
-import { InstructionsFeatureComponent } from './instructions-feature/instructions-feature.component';
-import { MatDialogClose, MatDialog, MatDialogContent,MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { CoeContactComponent } from './coe-contact/coe-contact.component';
+import { InstructionsComponent } from './instructions/instructions.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
+import { PopupSupportWindowComponent } from './popup-support-window/popup-support-window.component';
 
 
 @NgModule({
   declarations: [
-    NewsletterFeatureComponent,
-    CoeContactFeatureComponent,
-    InstructionsFeatureComponent
+    CoeContactComponent,
+    InstructionsComponent,
+    NewsletterComponent,
+    PopupSupportWindowComponent
+
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    NewsletterFeatureComponent,
-    CoeContactFeatureComponent,
-    InstructionsFeatureComponent
+    CoeContactComponent,
+    InstructionsComponent,
+    NewsletterComponent,
+    PopupSupportWindowComponent
   ]
 })
 export class SupportModule { }

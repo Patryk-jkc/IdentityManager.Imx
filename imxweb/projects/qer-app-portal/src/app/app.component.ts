@@ -33,7 +33,8 @@ import { AppConfigService,AuthenticationService, ISessionState, MenuItem, System
 import { PendingItemsType, ProjectConfigurationService, UserModelService } from 'qer';
 import { QerProjectConfig } from 'imx-api-qer';
 import { ProjectConfig } from 'imx-api-qbm';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PopupSupportWindowComponent } from 'projects/qer/src/lib/support/popup-support-window/popup-support-window.component';
 
 
 @Component({
@@ -58,7 +59,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     systemInfoService: SystemInfoService,
     ieWarningService: IeWarningService,
-    projectConfig: ProjectConfigurationService
+    projectConfig: ProjectConfigurationService,
+    private dialog: MatDialog
   ) {
     this.subscriptions.push(
       this.authentication.onSessionResponse.subscribe(async (sessionState: ISessionState) => {
@@ -93,6 +95,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public async ngOnInit(): Promise<void> {
     this.authentication.update();
+    this.OpenDialogWin();
   }
 
   public ngOnDestroy(): void {
@@ -138,5 +141,29 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     }));
   }
-  
+  public OpenDialogWin() {
+    var newsLast: Date
+    var newsDBdate: Date
+
+    try {
+      newsLast =new Date(parseInt(localStorage.getItem('newsLast'),10));
+    } catch {}
+    if (newsLast == null || !isFinite(+newsLast)) {newsLast = new Date(+0);}
+ 
+    newsDBdate = new Date(); //get from API
+    if (!!!newsDBdate) {return;}
+
+    if (newsLast < newsDBdate  ) {
+      const dialogConfig = new MatDialogConfig();
+
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      dialogConfig.id = 'ing-news';
+      dialogConfig.data = {newsDBdate: newsDBdate.getTime().toString()}
+      this.dialog.open(PopupSupportWindowComponent, dialogConfig);
+
+     
+
+    }
+  }
 }

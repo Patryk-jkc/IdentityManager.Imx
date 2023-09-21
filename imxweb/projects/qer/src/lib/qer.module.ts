@@ -63,18 +63,10 @@ import { UserModule } from './user/user.module';
 import { ShoppingCartValidationDetailModule } from './shopping-cart-validation-detail/shopping-cart-validation-detail.module';
 import { RoleMembershipsModule } from './role-management/role-memberships/role-memberships.module';
 import { MaintenanceBannerComponent } from './wport/start/maintenance-banner/maintenance-banner.component';
-// Newsletter module during training
-//import { NewsletterModule } from './newsletter/newsletter.module';
-//import { NewsletterFeatureComponent } from './newsletter/newsletter-feature/newsletter-feature.component';
-//
 import { SupportModule } from './support/support.module';
-import { CoeContactFeatureComponent } from './support/coe-contact-feature/coe-contact-feature.component';
-import { NewsletterFeatureComponent } from './support/newsletter-feature/newsletter-feature.component';
-import { InstructionsFeatureComponent } from './support/instructions-feature/instructions-feature.component'; 
-//
-import { InfodialogoiModule } from './infodialogoi/infodialogoi.module';
-import { MatDialogClose, MatDialog, MatDialogContent,MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { NewsletterComponent } from './support/newsletter/newsletter.component';
+import { CoeContactComponent } from './support/coe-contact/coe-contact.component';
+import { InstructionsComponent } from './support/instructions/instructions.component';
 
 export function initConfig(config: QerService): () => Promise<any> {
   return () =>
@@ -93,22 +85,22 @@ const routes: Routes = [
     canActivate: [RouteGuardService],
     resolve: [RouteGuardService],
   },
-  // Add newsletter to our routs
   {
     path: 'newsletter',
-    component: NewsletterFeatureComponent,
+    component: NewsletterComponent,
     canActivate: [RouteGuardService],
     resolve: [RouteGuardService],
   },
   {
     path: 'instructions',
-    component: InstructionsFeatureComponent,
+    component: InstructionsComponent,
     canActivate: [RouteGuardService],
     resolve: [RouteGuardService],
   },
   {
-    path: 'coecontact',
-    component: CoeContactFeatureComponent,
+    path: 'coe-contact',
+    component: CoeContactComponent,
+
     canActivate: [RouteGuardService],
     resolve: [RouteGuardService],
   },
@@ -143,9 +135,7 @@ const routes: Routes = [
     FkAdvancedPickerModule,
     OpsModule,
     DataExplorerViewModule,
-    SupportModule,
-    InfodialogoiModule
-     //, // Adding newsletter module
+    SupportModule
 
   ],
   exports: [StarlingComponent, PasscodeViewerComponent, ObjectOverviewPersonComponent],
